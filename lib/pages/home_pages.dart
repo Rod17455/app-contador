@@ -42,18 +42,18 @@ class _HomePagesState extends State<HomePages> {
             onPressed: () => _botonMax()
           ),
 
-          SizedBox(width: 10,),
+          SizedBox(width: 114,),
 
           FloatingActionButton(
             child: const Icon(Icons.remove),
             onPressed: () => _botonMenos()
           ),
-          SizedBox(width: 10,),
+          SizedBox(width: 114,),
           FloatingActionButton(
             child: const Icon(Icons.restart_alt),
             onPressed: () => _botonResetear()
           ),
-          SizedBox(width: 10,),
+          SizedBox(width: 114,),
 
 
         ],
