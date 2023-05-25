@@ -57,7 +57,8 @@ class _ContenidoState extends State<Contenido> {
             )
           ),
           SizedBox(height: 5,),
-          Datos()
+          Datos(),
+          
         ],
       ),
     );
@@ -127,7 +128,7 @@ class _DatosState extends State<Datos> {
             ),
           ),
           Remember(),
-          SizedBox(),
+          const SizedBox(height: 20,),
           Botones()
         ],
       ),
@@ -144,9 +145,29 @@ class Remember extends StatefulWidget {
 }
 
 class _RememberState extends State<Remember> {
+
+  bool valor = false;
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Row(
+      children: [
+        Checkbox(
+          value: valor, 
+          onChanged: (value){
+            setState(() {
+              valor == false ? valor = true : valor = false;
+            });
+          }
+        ),
+        const Text('Remember me'),
+        const Spacer(),
+        TextButton(
+          onPressed: () {}, 
+          child: const Text('Forgot password')
+        )
+      ],
+    );
   }
 }
 
@@ -155,7 +176,71 @@ class Botones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return  Column(
+      children: [
+         SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff142047))
+              ), 
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.white
+              ),
+            )
+          ),
+        ),
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        const Text(
+          'Or sign with',
+          style: TextStyle(color: Colors.grey),
+        ),
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: OutlinedButton(
+            onPressed: () {}, 
+            child: const Text(
+              'Sign with Google',
+              style: TextStyle(
+                color: Color(0xff142047),
+                fontSize: 18
+              ),
+            )
+          ),
+        ), // GOOGLE
+        const SizedBox(
+          width: double.infinity,
+          height: 25,
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: OutlinedButton(
+            onPressed: () {}, 
+            child: const Text(
+              'Sign with Facebook',
+              style: TextStyle(
+                color: Color(0xff142047),
+                fontSize: 18
+              ),
+            )
+          ),
+        ), // FACEBOOK
+
+      ],
+    );
   }
 }
 
@@ -164,6 +249,18 @@ class Fondo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.blue.shade400,
+            Colors.blue.shade800
+          ],
+          begin: Alignment.centerRight,
+          end: Alignment.bottomLeft
+        )
+      ),
+      
+    );
   }
 }
