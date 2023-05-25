@@ -57,6 +57,7 @@ class _ContenidoState extends State<Contenido> {
             )
           ),
           SizedBox(height: 5,),
+          
           Datos(),
           
         ],
