@@ -10,7 +10,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Fondo(),
@@ -31,10 +32,8 @@ class Contenido extends StatefulWidget {
 class _ContenidoState extends State<Contenido> {
   @override
   Widget build(BuildContext context) {
-    return  const Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20
-      ),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,22 +43,20 @@ class _ContenidoState extends State<Contenido> {
             style: TextStyle(
               color: Colors.white,
               fontSize: 30,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 5,),
+          SizedBox(height: 5),
           Text(
-            'Welcome to you account',
+            'Welcome to your account',
             style: TextStyle(
               color: Colors.white,
               fontSize: 10,
               letterSpacing: 1.5,
-            )
+            ),
           ),
-          SizedBox(height: 5,),
-          
+          SizedBox(height: 5),
           Datos(),
-          
         ],
       ),
     );
@@ -74,66 +71,78 @@ class Datos extends StatefulWidget {
 }
 
 class _DatosState extends State<Datos> {
-  bool obs = true;
+   bool obs = true;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Email',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Email',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-          ),
-          const SizedBox(height: 5,),
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'email@example.com'
+            const SizedBox(height: 5),
+            TextFormField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'email@example.com',
+              ),
             ),
-          ),
-          SizedBox(height: 5,),
-          const Text(
-             'Password',
-             style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+            const SizedBox(height: 5),
+            const Text(
+              'Password',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-          ),
-          const SizedBox(height: 5,),
-          TextFormField(
-            obscureText: obs,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'password here',
-              suffixIcon: IconButton(
-                icon: Icon(
-                  Icons.remove_red_eye_outlined
+            const SizedBox(height: 5),
+            TextFormField(
+              controller: passwordController,
+              obscureText: obs,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: 'password here',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.remove_red_eye_outlined),
+                  onPressed: () {
+                    setState(() {
+                      obs = !obs;
+                    });
+                  },
                 ),
-                onPressed: () => {
-                  setState(()=> obs == true ? obs = false : obs = true
-                  )
-                },
-              )
+              ),
             ),
-          ),
-          Remember(),
-          const SizedBox(height: 20,),
-          Botones()
-        ],
+            const Remember(),
+            const SizedBox(height: 20),
+            const Botones(),
+          ],
+        ),
       ),
-      
     );
   }
 }
@@ -154,19 +163,19 @@ class _RememberState extends State<Remember> {
     return Row(
       children: [
         Checkbox(
-          value: valor, 
-          onChanged: (value){
+          value: valor,
+          onChanged: (value) {
             setState(() {
-              valor == false ? valor = true : valor = false;
+              valor = !valor;
             });
-          }
+          },
         ),
         const Text('Remember me'),
         const Spacer(),
         TextButton(
-          onPressed: () {}, 
-          child: const Text('Forgot password')
-        )
+          onPressed: () {},
+          child: const Text('Forgot password'),
+        ),
       ],
     );
   }
